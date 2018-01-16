@@ -17,15 +17,15 @@ private:
 	mutable mutex mutex_;
 
 public:
-	Stack(); /*noexpect*/
-	Stack(const Stack<T>& Object); /*unsafe ---> strong*/  
-	size_t count() const; /*noexpect*/
-	size_t array_size() const; /*noexpect*/
-	void push(T const &); /*unsafe ---> strong*/ 
+	Stack();
+	Stack(const Stack<T>& Object); 
+	size_t count() const; 
+	size_t array_size() const; 
+	void push(T const &);
 	auto pop()->std::shared_ptr<T>;
-	void print(); /*strong*/
-	void swap(Stack<T>&); /*noexpect*/
-	bool empty() const /*noexpect*/;
+	void print();
+	void swap(Stack<T>&);
+	bool empty() const 
 
 
 
