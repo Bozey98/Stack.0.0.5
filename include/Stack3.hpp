@@ -117,7 +117,7 @@ auto Stack<T>::pop() -> std::shared_ptr<T>
 
 	if (empty())
 	{
-		throw logic_error("Stack is empty");
+		throw "Stack is empty";
 	}
 
 	auto top = make_shared<T>(*(array_ + count_ - 1));
