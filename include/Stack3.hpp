@@ -23,9 +23,7 @@ public:
 	size_t array_size() const; /*noexpect*/
 	void push(T const &); /*unsafe ---> strong*/ 
 	auto pop()->std::shared_ptr<T>;
-	T last() const; /*strong*/
 	void print(); /*strong*/
-	Stack<T>& operator=(const Stack<T>& Object); /*strong*/
 	void swap(Stack<T>&); /*noexpect*/
 	bool empty() const /*noexpect*/;
 
@@ -128,13 +126,7 @@ auto Stack<T>::pop() -> std::shared_ptr<T>
 	return top;
 }
 
-template <typename T>
-T Stack<T>::last()const
-{
-	if (count_ == 0)
-		throw logic_error("Stack is empty");
-	else return array_[count_ - 1];
-}
+
 
 template <typename T>
 void Stack<T>::print()
@@ -146,25 +138,15 @@ void Stack<T>::print()
 }
 
 
-template<typename T>
-Stack<T>& Stack<T>::operator=(const Stack<T>& Object)
-{
-	lock_guard<std::mutex> lock(Object.mutex_);
-	if (&Object != this)
-		Stack(Object).swap(*this);
-	return *this;
-}
-
 
 
 template <typename T>
 void Stack<T>::swap(Stack<T>& Object)
 {
-	lock(mutex_, Object.mutex_);
+	Object.mutex_.lock();
 	swap(array_, Object.array_);
 	swap(array_size_, Object.array_size_);
 	swap(count_, Object.count_);
-	mutex_.unlock();
 	Object.mutex_.unlock();
 }
 
