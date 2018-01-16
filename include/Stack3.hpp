@@ -122,8 +122,8 @@ auto Stack<T>::pop() -> std::shared_ptr<T>
 	
 	else 
 	{
-	--count_;
-	return std::make_shared<T>(array_[count_]);
+		--count_;
+		return std::make_shared<T>(array_[count_]);
 	}
 }
 
