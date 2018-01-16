@@ -113,17 +113,18 @@ void Stack<T>::push(T const& value) {
 template <typename T>
 auto Stack<T>::pop() -> std::shared_ptr<T>
 {
-	std::lock_guard<mutex> lock(mutex_);
+	lock_guard<mutex> lock(mutex_);
 
 	if (empty())
 	{
 		throw "Stack is empty";
 	}
-
-	auto top = make_shared<T>(*(array_ + count_ - 1));
+	
+	else 
+	{
 	--count_;
-
-	return top;
+	return std::make_shared<T>(array_[count_]);
+	}
 }
 
 
